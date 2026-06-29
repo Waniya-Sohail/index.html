@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BookVerse - Book Recommendation Website</title>
+
+<style>
+    /* ===========================
+   Google Font
+=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===========================
+   Reset
+=========================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#F8F5FF;
+    color:#4B4453;
+}
+
+/* ===========================
+   Navbar
+=========================== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(15px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 8%;
+    z-index:1000;
+    box-shadow:0 5px 20px rgba(181,126,220,.15);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+    color:#A855F7;
+}
+
+.logo span{
+    color:#6D28D9;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+}
+
+nav ul li{
+    margin-left:30px;
+    
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:#575252;
+    font-weight:500;
+    transition:.3s;
+}
+
+nav ul li a:hover{
+    color:#A855F7;
+}
+
+.login-btn{
+    padding:10px 24px;
+    border:none;
+    border-radius:30px;
+    background:#B57EDC;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#9B5DE5;
+}
+
+/* ===========================
+Hero Section
+=========================== */
+
+.hero{
+    padding:140px 8% 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+}
+
+.hero-text{
+    width:50%;
+}
+
+.hero-text h1{
+    font-size:55px;
+    line-height:70px;
+    color:#4B4453;
+}
+
+.hero-text span{
+    color:#B57EDC;
+}
+
+.hero-text p{
+    margin:25px 0;
+    line-height:30px;
+    color:#666;
+}
+
+.hero-btn{
+    padding:15px 35px;
+    border:none;
+    border-radius:40px;
+    background:#B57EDC;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.hero-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(181,126,220,.35);
+}
+
+/* ===========================
+Slider
+=========================== */
+
+.slider{
+    width:450px;
+    position:relative;
+}
+
+.slide{
+    display:none;
+}
+
+.slide img{
+    width:100%;
+    border-radius:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.slide.active{
+    display:block;
+}
+
+.prev,
+.next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:white;
+    cursor:pointer;
+    font-size:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.prev{
+    left:-20px;
+}
+
+.next{
+    right:-20px;
+}
+
+.prev:hover,
+.next:hover{
+    background:#B57EDC;
+    color:white;
+}
+
+/* ===========================
+Search Section
+=========================== */
+
+.search-section{
+    padding:70px 8%;
+}
+
+.search-box{
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-radius:60px;
+    padding:15px 20px;
+    box-shadow:0 10px 30px rgba(181,126,220,.15);
+}
+
+.search-box input{
+    width:100%;
+    border:none;
+    outline:none;
+    font-size:17px;
+    padding:10px;
+    background:transparent;
+}
+
+.search-box button{
+    padding:14px 30px;
+    border:none;
+    border-radius:40px;
+    background:#B57EDC;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.search-box button:hover{
+    background:#9B5DE5;
+}
+
+/* ===========================
+Section Heading
+=========================== */
+
+.title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.title h2{
+    font-size:38px;
+    color:#4B4453;
+}
+
+.title p{
+    margin-top:10px;
+    color:#777;
+}
+/* ===========================
+   Categories
+=========================== */
+
+.categories{
+    padding:80px 8%;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:25px;
+}
+
+.category-card{
+    background:#fff;
+    padding:35px 20px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(181,126,220,.12);
+    transition:.3s;
+    cursor:pointer;
+}
+
+.category-card:hover{
+    transform:translateY(-10px);
+    background:#B57EDC;
+    color:#fff;
+}
+
+.category-card i{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.category-card h3{
+    font-size:20px;
+    color:#3f2a55 ;
+}
+
+/* ===========================
+   Mood Tracker
+=========================== */
+
+.mood-section{
+    padding:80px 8%;
+}
+
+.mood-container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.mood-btn{
+    padding:15px 30px;
+    border:none;
+    border-radius:40px;
+    background:#fff;
+    color:#4B4453;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(181,126,220,.15);
+    transition:.3s;
+}
+
+.mood-btn:hover,
+.mood-btn.active{
+    background:#B57EDC;
+    color:#fff;
+    transform:translateY(-5px);
+}
+
+/* ===========================
+   Trending Books
+=========================== */
+
+.books{
+    padding:80px 8%;
+}
+
+.book-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.book-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(181,126,220,.15);
+    transition:.3s;
+}
+
+.book-card:hover{
+    transform:translateY(-10px);
+}
+
+.book-card img{
+    width:100%;
+    height:330px;
+    object-fit:cover;
+}
+
+.book-info{
+    padding:20px;
+}
+
+.book-info h3{
+    color:#4B4453;
+    margin-bottom:10px;
+}
+
+.book-info p{
+    color:#777;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.rating{
+    color:#F5B301;
+    margin-bottom:15px;
+}
+
+.book-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:#B57EDC;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.book-btn:hover{
+    background:#9B5DE5;
+}
+
+/* ===========================
+   Quote Section
+=========================== */
+
+.quote{
+    margin:80px 8%;
+    padding:60px;
+    background:linear-gradient(135deg,#D8B4F8,#B57EDC);
+    color:#fff;
+    border-radius:25px;
+    text-align:center;
+}
+
+.quote h2{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.quote p{
+    font-size:18px;
+    line-height:30px;
+}
+
+/* ===========================
+   Newsletter
+=========================== */
+
+.newsletter{
+    padding:80px 8%;
+    text-align:center;
+}
+
+.news-box{
+    max-width:700px;
+    margin:auto;
+    display:flex;
+    background:#fff;
+    border-radius:50px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(181,126,220,.15);
+}
+
+.news-box input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:18px;
+    font-size:16px;
+}
+
+.news-box button{
+    padding:18px 35px;
+    border:none;
+    background:#B57EDC;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.news-box button:hover{
+    background:#9B5DE5;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer{
+    background:#4B4453;
+    color:#fff;
+    padding:50px 8% 20px;
+}
+
+.footer-content{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:40px;
+}
+
+.footer-content h3{
+    margin-bottom:20px;
+}
+
+.footer-content a{
+    display:block;
+    color:#ddd;
+    text-decoration:none;
+    margin:10px 0;
+    transition:.3s;
+}
+
+.footer-content a:hover{
+    color:#D8B4F8;
+}
+
+.footer-bottom{
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.15);
+    margin-top:30px;
+    padding-top:20px;
+    color:#ddd;
+}
+
+/* ===========================
+   Scroll Button
+=========================== */
+
+#topBtn{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:#B57EDC;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+    display:none;
+    box-shadow:0 8px 20px rgba(181,126,220,.25);
+}
+
+#topBtn:hover{
+    background:#9B5DE5;
+}
+
+/* ===========================
+   Responsive Design
+=========================== */
+
+@media(max-width:992px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-text{
+    width:100%;
+}
+
+.slider{
+    width:100%;
+    max-width:420px;
+}
+
+nav ul{
+    display:none;
+}
+
+.news-box{
+    flex-direction:column;
+    border-radius:20px;
+}
+
+.news-box button{
+    width:100%;
+}
+
+}
+
+@media(max-width:768px){
+
+.hero-text h1{
+    font-size:38px;
+    line-height:50px;
+}
+
+.title h2{
+    font-size:30px;
+}
+
+.quote{
+    padding:35px 20px;
+}
+
+.quote h2{
+    font-size:28px;
+}
+
+.search-box{
+    flex-direction:column;
+    gap:15px;
+    border-radius:20px;
+}
+
+.search-box button{
+    width:100%;
+}
+
+.book-card img{
+    height:280px;
+}
+
+}
+
+@media(max-width:480px){
+
+header{
+    padding:15px 5%;
+}
+
+.hero{
+    padding:120px 5% 60px;
+}
+
+.categories,
+.books,
+.mood-section,
+.newsletter,
+.search-section{
+    padding:60px 5%;
+}
+
+.logo{
+    font-size:22px;
+}
+
+.hero-text h1{
+    font-size:30px;
+    line-height:40px;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+    <!-- ================= Header ================= -->
+
+    <header>
+
+        <div class="logo">
+            📚 Book<span>Verse</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#books">Novels</a></li>
+                <li><a href="#mood">Mood Finder</a></li>
+                <li><a href="#Trendingbooks"> Books</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+
+        <button class="login-btn">
+            Login
+        </button>
+
+    </header>
+
+    <!-- ================= Hero ================= -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+                Discover Your
+                <span>Next Favorite</span>
+                Book
+            </h1>
+
+            <p>
+                Explore thousands of novels, self-help books,
+                fantasy adventures and inspiring stories.
+                Find the perfect book according to your mood.
+            </p>
+
+            <button class="hero-btn">
+                Explore Books
+            </button>
+
+        </div>
+
+        <!-- ================= Slider ================= -->
+
+        <div class="slider">
+
+            <div class="slide active">
+                <img src="https://i5.walmartimages.com/seo/Harry-Potter-Harry-Potter-and-the-Prisoner-of-Azkaban-Harry-Potter-Book-3-Minalima-Edition-Hardcover-9781338815283_5e00256d-a3f9-4b5f-bf0a-24b11f87b1a6.94884053afaf1c426efcdd52f979c14a.jpeg">
+            </div>
+
+            <div class="slide">
+                <img src="https://m.media-amazon.com/images/I/81ZtAPCqyGL._SL1500_.jpg">
+            </div>
+
+            <div class="slide">
+                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1541428344i/17165596.jpg">
+            </div>
+
+            <button class="prev">
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+
+            <button class="next">
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ================= Search ================= -->
+
+    <section class="search-section">
+
+        <div class="title">
+            <h2>Search Your Favorite Book</h2>
+            <p>Search by title, author or genre.</p>
+        </div>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                placeholder="Search books...">
+
+            <button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
+
+        </div>
+        <!-- ================= Categories ================= -->
+
+<section class="categories" id="categories">
+
+    <div class="title">
+        <h2>Browse Categories</h2>
+        <p>Choose your favourite genre</p>
+    </div>
+
+    <div class="category-grid">
+
+        <div class="category-card">
+            <i class="fa-solid fa-heart"></i>
+            <h3>Novels</h3>
+        </div>
+
+        <div class="category-card">
+            <i class="fa-solid fa-hat-wizard"></i>
+            <h3>Fantasy</h3>
+        </div>
+
+        <div class="category-card">
+            <i class="fa-solid fa-user-secret"></i>
+            <h3>Mystery</h3>
+        </div>
+
+        <div class="category-card">
+            <i class="fa-solid fa-brain"></i>
+            <h3>Self Help</h3>
+        </div>
+
+        <div class="category-card">
+            <i class="fa-solid fa-laptop-code"></i>
+            <h3>Technology</h3>
+        </div>
+
+        <div class="category-card">
+            <i class="fa-solid fa-ghost"></i>
+            <h3>Horror</h3>
+        </div>
+
+        <div class="category-card">
+            <i class="fa-solid fa-earth-americas"></i>
+            <h3>Adventure</h3>
+        </div>
+
+        <div class="category-card">
+            <i class="fa-solid fa-book-open"></i>
+            <h3>Fiction</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Mood Tracker ================= -->
+
+<section class="mood-section" id="mood">
+
+    <div class="title">
+        <h2>Choose Your Mood</h2>
+        <p>We'll recommend books based on your mood.</p>
+    </div>
+
+    <div class="mood-container">
+
+        <button class="mood-btn">😊 Happy</button>
+        <button class="mood-btn">😍 Curious</button>
+        <button class="mood-btn">😢 Sad</button>
+        <button class="mood-btn">😴 Relaxed</button>
+        <button class="mood-btn">🔥 Motivated</button>
+        <button class="mood-btn">😰 Stressed</button>
+
+    </div>
+
+</section>
+
+<!-- ================= Trending Books ================= -->
+
+<section class="books" id="books">
+
+    <div class="title">
+        <h2>Trending Books</h2>
+        <p>Readers' favourite picks this month.</p>
+    </div>
+
+    <div class="book-grid">
+
+        <div class="book-card">
+            <img src="https://jamesclear.com/wp-content/uploads/2019/04/atomicHC-flat-1-e1556572683325.jpg.">
+            <div class="book-info">
+                <h3>Atomic Habits</h3>
+                <p>James Clear</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <button class="book-btn">Read More</button>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="https://c8.alamy.com/comp/2NR96HW/the-alchemist-by-paulo-coelho-2NR96HW.jpg">
+            <div class="book-info">
+                <h3>The Alchemist</h3>
+                <p>Paulo Coelho</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <button class="book-btn">Read More</button>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="https://i0.wp.com/highschool.latimes.com/wp-content/uploads/2022/10/it-ends-w-us.png?fit=2273%2C1515&ssl=1.jpg">
+            <div class="book-info">
+                <h3>It Ends With Us</h3>
+                <p>Colleen Hoover</p>
+                <div class="rating">⭐⭐⭐⭐☆</div>
+                <button class="book-btn">Read More</button>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="https://m.media-amazon.com/images/I/A1H7wsNOnUL._SL1500.jpg">
+            <div class="book-info">
+                <h3>Harry Potter</h3>
+                <p>J. K. Rowling</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <button class="book-btn">Read More</button>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1441831053i/3260388.jpg">
+            <div class="book-info">
+                <h3>peer-e-kamil</h3>
+                <p>Umera Ahmed</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <button class="book-btn">Read More</button>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="https://img.drz.lazcdn.com/static/pk/p/e882fb829d6374d8f7ef5ff73f749a2a.jpg_720x720q80.jpg" >
+            <div class="book-info">
+                <h3>jannat-kay-pattay</h3>
+                <p>Nimra Ahmed</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <button class="book-btn">Read More</button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Quote ================= -->
+
+<section class="quote">
+
+    <h2>Book of the Day</h2>
+
+    <p>
+        "A reader lives a thousand lives before he dies.
+        The man who never reads lives only one."
+    </p>
+
+</section>
+
+<!-- ================= Newsletter ================= -->
+
+<section class="newsletter">
+
+    <div class="title">
+        <h2>Subscribe</h2>
+        <p>Get weekly book recommendations.</p>
+    </div>
+
+    <div class="news-box">
+
+        <input type="email"
+            placeholder="Enter your email">
+
+        <button>Subscribe</button>
+
+    </div>
+
+</section>
+
+<!-- ================= Footer ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+            <h3>BookVerse</h3>
+            <p>
+                Discover books you'll love and enjoy
+                reading every day.
+            </p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <a href="#">Home</a>
+            <a href="#">Categories</a>
+            <a href="#">Trending</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div>
+            <h3>Follow Us</h3>
+            <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+            <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i> X</a>
+            <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 BookVerse | All Rights Reserved.
+    </div>
+
+</footer>
+
+<!-- Back To Top -->
+
+<button id="topBtn">
+    ↑
+</button>
+
+<script src="script.js"></script>
+
+
+    </section>
+
+    <script>
+// ======================
+// Manual Slider
+// ======================
+
+const slides = document.querySelectorAll(".slide");
+const next = document.querySelector(".next");
+const prev = document.querySelector(".prev");
+
+let currentSlide = 0;
+
+function showSlide(index){
+
+    slides.forEach((slide)=>{
+        slide.classList.remove("active");
+    });
+
+    slides[index].classList.add("active");
+
+}
+
+next.addEventListener("click",()=>{
+
+    currentSlide++;
+
+    if(currentSlide >= slides.length){
+        currentSlide = 0;
+    }
+
+    showSlide(currentSlide);
+
+});
+
+prev.addEventListener("click",()=>{
+
+    currentSlide--;
+
+    if(currentSlide < 0){
+        currentSlide = slides.length - 1;
+    }
+
+    showSlide(currentSlide);
+
+});
+
+// ======================
+// Mood Buttons
+// ======================
+
+const moodButtons = document.querySelectorAll(".mood-btn");
+
+moodButtons.forEach((button)=>{
+
+    button.addEventListener("click",()=>{
+
+        moodButtons.forEach((btn)=>{
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+    });
+
+});
+
+// ======================
+// Back To Top
+// ======================
+
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY > 300){
+
+        topBtn.style.display="block";
+
+    }
+
+    else{
+
+        topBtn.style.display="none";
+
+    }
+
+});
+
+topBtn.addEventListener("click",()=>{
+
+    window.scrollTo({
+
+        top:0,
+        behavior:"smooth"
+
+    });
+
+});
+
+// ======================
+// Smooth Navigation
+// ======================
+
+document.querySelectorAll('nav a').forEach(link=>{
+
+    link.addEventListener("click",function(e){
+
+        if(this.getAttribute("href").startsWith("#")){
+
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+
+                behavior:"smooth"
+
+            });
+
+        }
+
+    });
+
+});
+// ==========================
+// Search Books
+// ==========================
+
+const searchInput = document.querySelector(".search-box input");
+const bookCards = document.querySelectorAll(".book-card");
+
+searchInput.addEventListener("keyup", () => {
+
+    const value = searchInput.value.toLowerCase();
+
+    bookCards.forEach((card) => {
+
+        const title = card.querySelector("h3").textContent.toLowerCase();
+
+        if (title.includes(value)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+});
+
+// ==========================
+// Mood Recommendation
+// ==========================
+
+const moodBtns = document.querySelectorAll(".mood-btn");
+
+moodBtns.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        let mood = btn.textContent.trim();
+
+        let message = "";
+
+        switch (mood) {
+
+            case "😊 Happy":
+                message = "Recommended: Harry Potter & The Alchemist";
+                break;
+
+            case "😍 Romantic":
+                message = "Recommended: It Ends With Us";
+                break;
+
+            case "😢 Sad":
+                message = "Recommended: The Midnight Library";
+                break;
+
+            case "😴 Relaxed":
+                message = "Recommended: Ikigai";
+                break;
+
+            case "🔥 Motivated":
+                message = "Recommended: Atomic Habits";
+                break;
+
+            case "😰 Stressed":
+                message = "Recommended: The Power of Now";
+                break;
+
+            default:
+                message = "Explore our collection!";
+        }
+
+        alert(message);
+
+    });
+
+});
+
+// ==========================
+// Favorite Button
+// ==========================
+
+const favoriteBtns = document.querySelectorAll(".favorite-btn");
+
+favoriteBtns.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        btn.classList.toggle("active");
+
+        if (btn.classList.contains("active")) {
+            btn.innerHTML = "❤️";
+        } else {
+            btn.innerHTML = "🤍";
+        }
+
+    });
+
+});
+
+// ==========================
+// Category Click Effect
+// ==========================
+
+const categoryCards = document.querySelectorAll(".category-card");
+
+categoryCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+        categoryCards.forEach(c => c.classList.remove("active"));
+
+        card.classList.add("active");
+
+    });
+
+});
+
+    </script>
+</body>
+</html>
